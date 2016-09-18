@@ -29,6 +29,12 @@ module GistsHelper
 		return formated_gist
 	end
 
+	def order_link(field)
+		order_desc_check = @orderfield == field && @order == "asc"
+		orderèpart = order_desc_check ?  "&order=desc" : ""
+		return all_gists_path + "?orderfield=" + field + orderèpart
+	end
+
 	private
 	def _format_date(datetime_string)
 		DateTime.parse(datetime_string).strftime("%e %b %Y %T")
