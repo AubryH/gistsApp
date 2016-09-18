@@ -1,33 +1,26 @@
 <div class="main gists-index">
   <div class="container">
+    <div class="header">
+      <h2> Gists of <%= @user %></h2>
+    </div>
   	<table>
   		<thead>
   			<tr>
-  				<th> Owner </th>
   				<th> Descripiton </th>
           <th> Date of creation </th>
   				<th> Last Update </th>
   				<th> Number of files </th>  				
-          <th> Number of comments </th>         
-  				<th> &nbsp;</th>  				
+  				<th> Number of comments </th>  				
   			</tr>
   		</thead>
   		<tbody>
   			<% @gists.each do |g| %>
 		    	<tr>
-            <td>
-              <% if no_user_placeholder != g["owner"] %>
-  		    		  <%= link_to g["owner"], user_path(:name=>g["owner"]) %>
-              <% else %>
-                <%= g["owner"] %>
-              <% end %>
-            </td>
 		    		<td><%= g["description"] %></td>
             <td><%= g["created_at"] %></td>
 		    		<td><%= g["updated_at"] %></td>
 		    		<td><%= g["number_of_files"]  %></td>
-            <td><%= g["number_of_comments"]  %></td>
-		    		<td><%= link_to "See More", gist_path(:id=>g["id"]) %></td>
+		    		<td><%= g["number_of_comments"]  %></td>
 	    		</tr>
 		    <% end %>
   		</tbody>

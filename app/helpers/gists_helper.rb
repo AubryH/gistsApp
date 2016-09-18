@@ -1,8 +1,25 @@
 module GistsHelper
+	def gists_host
+		"https://api.github.com"
+	end
+
+	def no_user_placeholder
+		"anonymous"
+	end
+
+	def format_gists(gists)
+		formated_gists = Array.new
+		gists.each do |gist|
+			formated_gists.push format_gist(gist)
+		end
+		return formated_gists
+	end
+
 	def format_gist(gist)
 		formated_gist = Hash.new
 
-		formated_gist["owner"] = gist["owner"].nil? ? "anonymous" : gist["owner"]["login"]
+		formated_gist["id"] = gist["id"]
+		formated_gist["owner"] = gist["owner"].nil? ? no_user_placeholder : gist["owner"]["login"]
 		formated_gist["description"] = gist["description"].to_s == '' ? "no description" : gist["description"]
 		formated_gist["created_at"] = _format_date(gist["created_at"])
 		formated_gist["updated_at"] = _format_date(gist["updated_at"])
